@@ -25,3 +25,24 @@ Node Core Modules:
 - _fs_ module enables us to interact with the file system. In a way it is modeled on standard POSIX functions.
 - _path_ module provides utillities for working with file and directory paths.
 - os module provides utilities such as methods and properties used for interacting with the operating system.
+
+When importing modules it is important to take a note of the path format used for the module import. In case you are using relative path the `require("./http")` the require method will look for module within the relative path. However, if you use just the module name, then it will look at the global scope and try to find the NodeJS module there.
+
+```JavaScript
+// NodeJS Imports
+const http = require("http");
+
+// func. for event listner
+// Simply a function that will execute for every
+// incoming request. It will print the the req to the stdout medium,
+// in case of running it from the terminal emulator it will default to it.
+function reqListener(req, res) {
+console.log(req);
+}
+
+// Takes event listner func as an arg.
+const server = http.createServer(reqListener);
+
+// Listen to port 3000 at your localhost address for incoming req
+server.listen("3000", "localhost");
+```
