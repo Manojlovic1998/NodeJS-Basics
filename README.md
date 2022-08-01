@@ -76,3 +76,28 @@ In Node.js _libuv_ module is used to perform async operations. This module/lib. 
 The libuv thread pool completes tasks which triggers callback function that handles errors or other operations depending on the process that was executed by the thread. This callback function is sent to the event queue. When the call stack is empty, the event goes through the event queue and sends the callback to the callstack.
 
 ![NodeJS Libuv Thread Pool Diagram](assets/img/nodejs-event-loop-diagram.png)
+
+## Requests in NodeJS
+
+Accessing the contents of the req. received by the nodejs server is easy. If you have have created the basic http server setup, the req. and res. objects will be provided to the callback function.
+
+When it comes to constructing the response package, nodejs server provides the callback func. with the second argument object which includes all the necessary methods to do so.
+
+```JavaScript
+
+const server = http.createServer((req, res) => {
+    // Logs the req received
+    console.log(req.url, req.method, req.headers);
+
+    // Constructs the resp package that is going to be sent
+    // over the http protocol
+    res.setHeader("Content-Type", "text/html");
+    res.write("<html>");
+    res.write("<head><title>My First Page</title></head>");
+    res.write("<body><h1>My First Page</h1></body>");
+    res.write("</html>");
+    res.end();
+});
+```
+
+Note: The above code is the most basic setup that you could use to run a server. For production grade applications you are not going to use this approach. This approach is more to show the very basics of NodeJS. Good example would be the Express.js framework.
