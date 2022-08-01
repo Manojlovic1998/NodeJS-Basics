@@ -46,3 +46,33 @@ const server = http.createServer(reqListener);
 // Listen to port 3000 at your localhost address for incoming req
 server.listen("3000", "localhost");
 ```
+
+## NodeJS Program Lifecycle
+
+Note: A process is an active entity as opposed to a program, which is considered to be a passive entity. A new process is created only when running an executable file.
+
+**Preamble:**
+NodeJS is JavaScript runtime that is built on top of Chrome's V8 engine. It uses an event-driven, non-blocking I/O model that makes it most scalable and popular framework.
+Non-blocking means that multiple requests can be processed in parallel.
+
+**The Event loop:**
+Event loop makes tasks very fast and is also able to perform multitasking. Event loop is what allows NodeJS to perform non-blocking I/O operations. NodeJS is single-threaded event-driven platform that is capable of running non-blocking, asynchronous programs. It does this by assigning operations to the operating system whenever and whereever possible.
+
+Now, most operating systems are multi-threaded hence can handle multiple operations executing in the background. When one process is completed the kernel tells Node.js this and the respective callback assigned to that operation is added to the event queue which will eventually be executed.
+
+_Event loop features_ are:
+
+- Event loop is an endless loop, which waits to receive tasks, it then executes them and then sleeps until it receives more tasks.
+- The event loop executes tasks from the event queue only when the call stack is empty i.e there is no ongoing task.
+- The event loop allows us to use callbacks and promisses.
+- The event loop executes the tasks starting from the oldest first.
+
+**How Event Loop Works?**
+
+When NodeJS starts it initializes the event loop, processes the provided script which may make async API calls, schedule timers, then begins processing the event loop.
+
+In Node.js _libuv_ module is used to perform async operations. This module/lib. is also used by the back logic of NodeJS to manage a special thread pool called _libuv thread pool_. This thread pool is comprised of four threads to which operations that are too heavy for the event loop are delegated. Example of such heavy processes are: opening and closing connections, seting timouts...
+
+The libuv thread pool completes tasks which triggers callback function that handles errors or other operations depending on the process that was executed by the thread. This callback function is sent to the event queue. When the call stack is empty, the event goes through the event queue and sends the callback to the callstack.
+
+![NodeJS Libuv Thread Pool Diagram](assets/img/nodejs-event-loop-diagram.png)
