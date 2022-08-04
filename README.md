@@ -69,11 +69,27 @@ _Event loop features_ are:
 
 **How Event Loop Works?**
 
-When NodeJS starts it initializes the event loop, processes the provided script which may make async API calls, schedule timers, then begins processing the event loop.
+When NodeJS starts it initializes the event loop. The event loop uses one single javascript thread to handle requests. The event loop is responsible for handling event callbacks. Event loop is aware of the callbacks and the events that trigger them.
 
-In Node.js _libuv_ module is used to perform async operations. This module/lib. is also used by the back logic of NodeJS to manage a special thread pool called _libuv thread pool_. This thread pool is comprised of four threads to which operations that are too heavy for the event loop are delegated. Example of such heavy processes are: opening and closing connections, setting timeouts...
+In Node.js _libuv_ module is used to perform async operations. This module/lib. is also used by the Nodejs logic to manage a special thread pool called _libuv thread pool_. This thread pool is comprised of four threads. To this thread pool (worker pool)operations that are resource heavy are offloaded by the event loop. Example of such heavy processes are: opening and closing network connections, I/O streams of data to a file, setting timeouts and intervals...
 
-The libuv thread pool completes tasks which triggers callback function that handles errors or other operations depending on the process that was executed by the thread. This callback function is sent to the event queue. When the call stack is empty, the event goes through the event queue and sends the callback to the call stack.
+The libuv thread pool may complete a task which in turn results in a signal being picked up by NodeJS which in turn triggers the callback function that handles errors or other operations depending on the process that was executed by the thread. This callback function is not immediately executed. It is first sent to the event queue. In the event queue there is order of function execution which NodeJS follows. Depending on the phase in which the current event loop iteration is depends what will be done by the event loop.
+
+The event loop has a certain order at which it goes through the callbacks.
+
+In the beginning of the iteration it checks for _timers_ (tries to execute setTimeout, setInterval callbacks) and executes any due timer callbacks.
+
+In the second phase of iteration it goes through any _pending callbacks_ that are related to I/O processes. I/O operations are typically file operations and some sort of network operations where data is streamed. At some point NodeJS will leave this part of the iteration phase and move to the next one, even if there are many callbacks standing in the event queue it will leave them for the next iteration.
+
+In the third phase of iteration event loop will enter the _poll phase_. In poll phase it will look for new I/O events and, if possible, it will execute their callbacks immediately. If it is not possible to execute their callbacks immediately it will add them as a _pending callbacks_ to be executed in the next iteration. Additionally, in the poll phase it will again check for any timer based callbacks that are due to be executed and if that is the case it will jump to the _timer phase_ and execute them right away. Otherwise, it will continue to the next phase.
+
+The fourth phase is called the _check phase_ where any `setImmediate()` callbacks will be executed. `setImediate()` is a bit like `setTimeout()` or `setInterval()` it is just that it executes immediately but after open callbacks have been executed. They will execute faster but after the current cycle has finished with the open callbacks.
+
+The last phase is _close callbacks_ during this phase some close callbacks are executed such as `socket.on('close',...)`.
+
+Internally NodeJS keeps track of its open event listeners, it has a counter/references which it increments by one for every new callback that is registered and reduces the counter by one for every event listener that it does not need anymore or that it has finished.
+
+[Additional Reading Material](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
 
 ![NodeJS Libuv Thread Pool Diagram](assets/img/nodejs-event-loop-diagram.png)
 
