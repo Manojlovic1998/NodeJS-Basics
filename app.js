@@ -3,14 +3,21 @@ const http = require("http");
 
 // Third Party Package Imports
 const express = require("express");
+const bodyParser = require("body-parser");
 
 // Instantiate Express App
 const app = express();
 
 // Middleware
+// Parses the body of the req
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Middleware
 app.use("/add-product", (req, res, next) => {
-  console.log("First middleware!");
-  res.send('<h1>The "Add Product" Page</h1>');
+  console.log(req.body);
+  res.send(
+    '<form action="/add-product" method="POST"><input type="text" name="title"><button type="submit">Submit</button></form>'
+  );
 });
 
 // Middleware
