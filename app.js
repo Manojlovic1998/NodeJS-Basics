@@ -13,8 +13,14 @@ const app = express();
 // Parses the body of the req
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Router
 app.use(adminRoutes);
 app.use(shopRoutes);
+
+// 404 Route
+app.use((req, res, next) => {
+  res.status(404).send("<h1>OOpps! Page not found.</h1>");
+});
 
 // Server Config
 const port = 3000;
