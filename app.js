@@ -1,3 +1,6 @@
+// Core Node.js Package Imports
+const path = require("path");
+
 // Third Party Package Imports
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -20,7 +23,7 @@ app.use(shopRoutes);
 
 // 404 Route
 app.use((req, res, next) => {
-  res.status(404).send("<h1>OOpps! Page not found.</h1>");
+  res.status(404).sendFile(path.join(__dirname, "views", "404-page.html"));
 });
 
 // Server Config
