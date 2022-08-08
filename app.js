@@ -13,8 +13,9 @@ const app = express();
 // Parses the body of the req
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Router with /admin filter
+app.use("/admin", adminRoutes);
 // Router
-app.use(adminRoutes);
 app.use(shopRoutes);
 
 // 404 Route
