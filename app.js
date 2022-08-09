@@ -11,7 +11,10 @@ const rootDir = require("./util/path.js");
 
 // Instantiate Express App
 const app = express();
-
+// Set a global value for template engine
+app.set("view engine", "pug");
+// Set dir where app's views can be found
+app.set("views", "views");
 // Middleware
 // Parses the body of the req
 app.use(bodyParser.urlencoded({ extended: false }));
