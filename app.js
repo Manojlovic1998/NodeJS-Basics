@@ -5,7 +5,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 // Project Imports
-const adminRoutes = require("./routes/admin.js");
+const adminData = require("./routes/admin.js");
 const shopRoutes = require("./routes/shop.js");
 const rootDir = require("./util/path.js");
 
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(rootDir, "public")));
 
 // Router with /admin filter
-app.use("/admin", adminRoutes);
+app.use("/admin", adminData.routes);
 // Router
 app.use(shopRoutes);
 
