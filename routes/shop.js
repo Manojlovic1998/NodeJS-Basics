@@ -13,8 +13,8 @@ const router = express.Router();
 // Middleware
 router.get("/", (req, res, next) => {
   // __dirname global variable that points to the folder in which we are using it
-  console.log(adminData.products);
-  res.sendFile(path.join(rootDir, "views", "shop.html"));
+  const products = adminData.products;
+  res.render("shop", { products, docTitle: "Shop" });
 });
 
 // Export Shop Router
