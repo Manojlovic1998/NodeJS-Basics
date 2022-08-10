@@ -20,8 +20,8 @@ html(lang="en")
                     div.collapse.navbar-collapse.d-lg-flex#navbarNavDropdown
                         ul.navbar-nav.ms-auto
                             li.nav-item
-                                a(href="/").nav-link Shop
+                                a(href="/" class=((path === "/") ? "active nav-link" : "nav-link")) Shop
                             li.nav-item
-                                a(href="/admin/add-product").nav-link Add Product
+                                a(href="/admin/add-product" class=((path === "/admin/add-product") ? "active nav-link" : "nav-link")) Add Product
         block content
         script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous") 
