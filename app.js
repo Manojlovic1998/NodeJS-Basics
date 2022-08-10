@@ -19,7 +19,9 @@ app.set("views", "views");
 // Parses the body of the req
 app.use(bodyParser.urlencoded({ extended: false }));
 // Serve static files from public using the FS
-app.use(express.static(path.join(rootDir, "public")));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/admin", express.static(path.join(__dirname, "public")));
 
 // Router with /admin filter
 app.use("/admin", adminData.routes);
@@ -28,7 +30,7 @@ app.use(shopRoutes);
 
 // 404 Route
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, "views", "404-page.html"));
+  res.status(404).render("404-page", { docTitle: "Page Not Found 404" });
 });
 
 // Server Config
