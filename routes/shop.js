@@ -14,7 +14,7 @@ const router = express.Router();
 router.get("/", (req, res, next) => {
   // __dirname global variable that points to the folder in which we are using it
   const products = adminData.products;
-  res.render("shop", { products, docTitle: "Shop" });
+  res.render("shop", { products, docTitle: "Shop", path: "/" });
 });
 
 // Export Shop Router
