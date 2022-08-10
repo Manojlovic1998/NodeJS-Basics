@@ -22,14 +22,14 @@ html(lang="en")
                                 a(href="/").nav-link Shop
                             li.nav-item
                                 a(active href="/admin/add-product").nav-link Add Product
-            main.container.py-5 
-                .row 
-                    .col-12.text-center 
-                        h1 Add Product
-                    .col-12.col-md-8.col-lg-6.mx-auto 
-                        form(action="/admin/add-product" method="POST" class="form")
-                            .form-group
-                                label(for="title") Product Title
-                                input(type="text" name="title" id="title").form-control
-                            button(type="submit").btn.btn-lg.mt-3.btn-primary Add Product 
+        main.container.py-5 
+            .row 
+                .col-12.text-center 
+                    h1 Add Product
+                .col-12.col-md-8.col-lg-6.mx-auto 
+                    form(action="/admin/add-product" method="POST" class="form")
+                        .form-group
+                            label(for="title") Product Title
+                            input(type="text" name="title" id="title").form-control
+                        button(type="submit").btn.btn-lg.mt-3.btn-primary Add Product 
         script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous") 
