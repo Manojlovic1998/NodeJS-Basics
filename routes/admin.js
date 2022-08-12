@@ -3,26 +3,15 @@ const path = require("path");
 
 // Third Party Package Imports
 const express = require("express");
+const { getAddProduct, postAddProduct } = require("../controllers/products");
 
 // Create Express.js router
 const router = express.Router();
 
-// Dummy Products Data
-const products = [];
-
 // /admin/add-product => GET
-router.get("/add-product", (req, res, next) => {
-  res.render("add-product", {
-    docTitle: "Add New Product",
-    path: "/admin/add-product",
-  });
-});
+router.get("/add-product", getAddProduct);
 
 // /admin/add-product => POST
-router.post("/add-product", (req, res, next) => {
-  products.push({ title: req.body.title });
-  res.render("shop", { products, docTitle: "Shop" });
-});
+router.post("/add-product", postAddProduct);
 
 exports.routes = router;
-exports.products = products;
