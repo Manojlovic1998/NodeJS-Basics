@@ -15,8 +15,9 @@ const postAddProduct = (req, res, next) => {
 
 const getProducts = (req, res, next) => {
   // __dirname global variable that points to the folder in which we are using it
-  const products = Product.fetchAll();
-  res.render("shop", { products, docTitle: "Shop", path: "/" });
+  Product.fetchAll((products) => {
+    res.render("shop", { products, docTitle: "Shop", path: "/" });
+  });
 };
 
 module.exports = {

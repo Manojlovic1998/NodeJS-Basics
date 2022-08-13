@@ -26,8 +26,14 @@ class Product {
     });
   }
 
-  static fetchAll() {
-    return products;
+  static fetchAll(templateRenderCallback) {
+    const filePath = path.join(rootPath, "data", "products.json");
+    fs.readFile(filePath, (error, fileData) => {
+      if (error) {
+        templateRenderCallback([]);
+      }
+      templateRenderCallback(JSON.parse(fileData));
+    });
   }
 }
 
