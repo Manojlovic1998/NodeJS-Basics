@@ -1,3 +1,5 @@
+const Product = require("../models/product");
+
 const getAddProduct = (req, res, next) => {
   res.render("add-product", {
     docTitle: "Add New Product",
@@ -5,16 +7,15 @@ const getAddProduct = (req, res, next) => {
   });
 };
 
-// Dummy Products Data
-const products = [];
-
 const postAddProduct = (req, res, next) => {
-  products.push({ title: req.body.title });
-  res.render("shop", { products, docTitle: "Shop" });
+  const product = new Product(req.body.title);
+  product.save();
+  res.redirect("/");
 };
 
 const getProducts = (req, res, next) => {
   // __dirname global variable that points to the folder in which we are using it
+  const products = Product.fetchAll();
   res.render("shop", { products, docTitle: "Shop", path: "/" });
 };
 
