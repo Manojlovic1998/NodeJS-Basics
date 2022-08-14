@@ -10,4 +10,13 @@ block content
                     .form-group
                         label(for="title") Product Title
                         input(type="text" name="title" id="title").form-control
-                        button(type="submit").btn.btn-lg.mt-3.btn-primary Add Product 
+                    .form-group 
+                        label(for="description") Product Description
+                        textarea#description(name="description" cols="30" rows="10").form-control
+                    .form-group 
+                        label(for="imageUrl") Product Image URL
+                        input#imageUrl(type="url" name="imageUrl").form-control
+                    .form-group 
+                        label(for="price") Product Price
+                        input#price(type="number" name="price" min="0").form-control
+                    button(type="submit").btn.btn-lg.mt-3.btn-primary Add Product 
