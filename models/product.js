@@ -13,11 +13,11 @@ const getProductsFromFile = (renderCallback) => {
   fs.readFile(filePath, (error, fileData) => {
     // If error return empty list
     if (error) {
-      renderCallback([]);
+      return renderCallback([]);
     }
 
     // Fallback, if no error, parse json and return it
-    renderCallback(JSON.parse(fileData));
+    return renderCallback(JSON.parse(fileData));
   });
 };
 
