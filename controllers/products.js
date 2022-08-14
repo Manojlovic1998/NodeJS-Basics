@@ -1,7 +1,7 @@
 const Product = require("../models/product");
 
 const getAddProduct = (req, res, next) => {
-  res.render("add-product", {
+  res.render("admin/add-product", {
     docTitle: "Add New Product",
     path: "/admin/add-product",
   });
@@ -16,7 +16,7 @@ const postAddProduct = (req, res, next) => {
 const getProducts = (req, res, next) => {
   // __dirname global variable that points to the folder in which we are using it
   Product.fetchAll((products) => {
-    res.render("shop", { products, docTitle: "Shop", path: "/" });
+    res.render("shop/product-list", { products, docTitle: "Shop", path: "/" });
   });
 };
 
