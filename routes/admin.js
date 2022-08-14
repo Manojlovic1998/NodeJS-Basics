@@ -3,13 +3,24 @@ const path = require("path");
 
 // Third Party Package Imports
 const express = require("express");
-const { getAddProduct, postAddProduct } = require("../controllers/products");
+const {
+  getAddProduct,
+  postAddProduct,
+  getProductList,
+  getEditProduct,
+} = require("../controllers/admin");
 
 // Create Express.js router
 const router = express.Router();
 
 // /admin/add-product => GET
 router.get("/add-product", getAddProduct);
+
+// /admin/products => GET
+router.get("/product-list", getProductList);
+
+// /admin/edit-product => GET
+router.get("/edit-product", getEditProduct);
 
 // /admin/add-product => POST
 router.post("/add-product", postAddProduct);
