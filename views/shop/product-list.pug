@@ -7,7 +7,13 @@ block content
                     h1 My Product
                     p List of all products:
                 each product in products 
-                    .col-12
-                        p #{product.title}
+                    .col-lg-3.col-md-4.col-12.mx-md-auto.bg-white.rounded.shadow
+                        img(src=(product.imageUrl) alt=(product.title)).img-fluid
+                        div.d-flex.justify-content-between
+                            h2.mt-3.mb-3  #{product.title}
+                            p #{product.price} $
+                        p #{product.description}
+
+
             else
                 h1 No Products
