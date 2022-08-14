@@ -19,7 +19,7 @@ const getCart = (req, res, next) => {
   res.render("shop/cart", { docTitle: "Cart", path: "/cart" });
 };
 
-const getCheckout = () => {
+const getCheckout = (req, res, next) => {
   res.render("shop/checkout", { docTitle: "Checkout", path: "/checkout" });
 };
 
