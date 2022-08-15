@@ -1,2 +1,14 @@
 extends ../layouts/main-layout
 block content
+  main.container.py-5 
+    .row 
+      .col-12.col-lg-6
+        img(src=(product.imageUrl), alt=(product.title)).img-fluid
+      .col-12.col-lg-6.d-flex.flex-column
+        div.mt-3
+          h1 #{product.title}
+          p.mt-3 #{product.description}
+        div.mt-3.d-flex
+          p.d-inline.fw-bold #{product.price} $
+        form(action="/add-to-cart" method="POST").mt-5
+          button(type="submit").btn.btn-outline-success Add To Cart
