@@ -11,6 +11,18 @@ const getProducts = (req, res, next) => {
   });
 };
 
+const getProductDetails = (req, res, next) => {
+  const productId = req.params.id;
+  return Product.fetchById((products) => {
+    let product = products.find((product) => product.id == productId);
+    return res.render("shop/product-detail", {
+      docTitle: product.title,
+      path: `/products`,
+      product,
+    });
+  });
+};
+
 const getIndex = (req, res, next) => {
   res.render("shop/index", { docTitle: "Landing Page", path: "/" });
 };
@@ -28,4 +40,5 @@ module.exports = {
   getIndex,
   getCart,
   getCheckout,
+  getProductDetails,
 };
