@@ -7,6 +7,7 @@ const {
   getCart,
   getCheckout,
   getProductDetails,
+  postCart,
 } = require("../controllers/shop");
 
 // Express.js Router
@@ -23,6 +24,9 @@ router.get("/products/:id", getProductDetails);
 
 // /cart => GET
 router.get("/cart", getCart);
+
+// /cart => POST
+router.post("/cart", postCart);
 
 // /checkout => GET
 router.get("/checkout", getCheckout);
