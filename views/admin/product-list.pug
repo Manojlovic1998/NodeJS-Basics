@@ -1,2 +1,22 @@
-extends ../layouts/main-layout
-block content
+extends ../layouts/main-layout.pug
+block content 
+  main.container.py-5 
+    .row 
+      if products.length > 0
+        .col-12 
+          h1 My Product
+          p List of all products:
+        each product in products 
+          .col-lg-3.col-md-4.col-12.mx-md-auto.bg-white.rounded.shadow.d-flex.flex-column
+            img(src=(product.imageUrl) alt=(product.title)).img-fluid
+            div.d-flex.justify-content-between.align-items-center.mt-3.mb-3
+              h2.m-0 #{product.title}
+              p.m-0 #{product.price} $
+            p #{product.description}
+            div.pt-2.pb-3.d-flex
+              div.d-inline-block.mx-auto
+                a(href="/admin/edit-product").btn.btn-outline-primary.btn-sm.me-2 Edit
+                form(action="/admin/delete-product" method="POST").d-inline
+                  button(type="submit").btn.btn-outline-danger.btn-sm.ms-2 Delete
+      else
+        h1 No Products
