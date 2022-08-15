@@ -31,6 +31,12 @@ const getCart = (req, res, next) => {
   res.render("shop/cart", { docTitle: "Cart", path: "/cart" });
 };
 
+const postCart = (req, res, next) => {
+  const productId = req.body.productId;
+  console.log(productId);
+  res.redirect("/cart");
+};
+
 const getCheckout = (req, res, next) => {
   res.render("shop/checkout", { docTitle: "Checkout", path: "/checkout" });
 };
@@ -41,4 +47,5 @@ module.exports = {
   getCart,
   getCheckout,
   getProductDetails,
+  postCart,
 };
