@@ -10,5 +10,6 @@ block content
           p.mt-3 #{product.description}
         div.mt-3.d-flex
           p.d-inline.fw-bold #{product.price} $
-        form(action="/add-to-cart" method="POST").mt-5
+        form(action="/cart" method="POST").mt-5
           button(type="submit").btn.btn-outline-success Add To Cart
+          input(type="hidden" name="productId", value=(product.id))
