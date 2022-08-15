@@ -25,12 +25,13 @@ const getAddProduct = (req, res, next) => {
 };
 
 const postAddProduct = (req, res, next) => {
+  const id = Math.random().toString();
   const title = req.body.title;
   const description = req.body.description;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
 
-  const product = new Product(title, imageUrl, description, price);
+  const product = new Product(id, title, imageUrl, description, price);
   product.save();
   res.redirect("/products");
 };
