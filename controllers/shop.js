@@ -2,7 +2,7 @@ const Product = require("../models/product");
 
 const getProducts = (req, res, next) => {
   // __dirname global variable that points to the folder in which we are using it
-  Product.fetchAll((products) => {
+  return Product.fetchAll((products) => {
     res.render("shop/product-list", {
       products,
       docTitle: "Shop",
