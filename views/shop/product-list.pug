@@ -13,8 +13,10 @@ block content
                             h2.m-0 #{product.title}
                             p.m-0 #{product.price} $
                         p #{product.description}
-                        div.pt-2.pb-3.d-flex
-                            form(action="/add-to-cart" method="POST").d-inline-block.mx-auto 
-                                button(type="submit").btn.btn-outline-primary Add To Cart
+                        div.pt-2.pb-3.d-flex.justify-content-center
+                            div
+                                a(href="/products").btn.btn-outline-primary.me-2 Details
+                                form(action="/add-to-cart" method="POST").d-inline-block.ms-2 
+                                    button(type="submit").btn.btn-outline-success Add To Cart
             else
                 h1 No Products
