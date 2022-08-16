@@ -16,10 +16,18 @@ const getEditProduct = (req, res, next) => {
     return res.redirect("/");
   }
 
-  res.render("admin/edit-product", {
-    docTitle: "Edit Product",
-    path: "/admin/edit-product",
-    editing,
+  let productId = req.params.id;
+  Product.fetchById(productId, (product) => {
+    if (!product) {
+      return res.redirect("/");
+    }
+
+    res.render("admin/edit-product", {
+      docTitle: "Edit Product",
+      path: "/admin/edit-product",
+      product,
+      editing,
+    });
   });
 };
 
