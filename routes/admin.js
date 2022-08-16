@@ -20,7 +20,7 @@ router.get("/add-product", getAddProduct);
 router.get("/product-list", getProductList);
 
 // /admin/edit-product => GET
-router.get("/edit-product", getEditProduct);
+router.get("/edit-product/:id", getEditProduct);
 
 // /admin/add-product => POST
 router.post("/add-product", postAddProduct);
