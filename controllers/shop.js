@@ -36,6 +36,7 @@ const postCart = (req, res, next) => {
   const productId = req.body.productId;
   Product.fetchById(productId, (product) => {
     Cart.addProduct(productId, product.price);
+    res.redirect("/cart");
   });
 };
 
