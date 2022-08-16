@@ -1,4 +1,6 @@
+// Project's imports
 const Product = require("../models/product");
+const Cart = require("../models/cart");
 
 const getProducts = (req, res, next) => {
   // __dirname global variable that points to the folder in which we are using it
@@ -13,8 +15,7 @@ const getProducts = (req, res, next) => {
 
 const getProductDetails = (req, res, next) => {
   const productId = req.params.id;
-  return Product.fetchById((products) => {
-    let product = products.find((product) => product.id == productId);
+  return Product.fetchById(productId, (product) => {
     return res.render("shop/product-detail", {
       docTitle: product.title,
       path: `/products`,
@@ -33,8 +34,9 @@ const getCart = (req, res, next) => {
 
 const postCart = (req, res, next) => {
   const productId = req.body.productId;
-  console.log(productId);
-  res.redirect("/cart");
+  Product.fetchById(productId, (product) => {
+    Cart.addProduct(productId, product.price);
+  });
 };
 
 const getCheckout = (req, res, next) => {
