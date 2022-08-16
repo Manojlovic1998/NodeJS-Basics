@@ -43,9 +43,10 @@ class Product {
     getProductsFromFile(templateRenderCallback);
   }
 
-  static fetchById(templateRenderCallback) {
-    this.fetchAll((products) => {
-      return templateRenderCallback(products);
+  static fetchById(productId, templateRenderCallback) {
+    getProductsFromFile((products) => {
+      let product = products.find((product) => product.id === productId);
+      return templateRenderCallback(product);
     });
   }
 }
