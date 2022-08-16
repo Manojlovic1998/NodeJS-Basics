@@ -11,9 +11,15 @@ const getProductList = (req, res, next) => {
 };
 
 const getEditProduct = (req, res, next) => {
+  let editing = req.query.edit;
+  if (editing !== "true") {
+    return res.redirect("/");
+  }
+
   res.render("admin/edit-product", {
     docTitle: "Edit Product",
     path: "/admin/edit-product",
+    editing,
   });
 };
 
