@@ -6,17 +6,17 @@ block content
       .col-12.text-center 
         h1 Add Product
       .col-12.col-md-8.col-lg-6.mx-auto 
-        form(action="/admin/add-product" method="POST" class="form")
+        form(action=(editing ? "/admin/edit-product/" + product.id : "/admin/add-product") method="POST" class="form")
           .form-group
             label(for="title") Product Title
-            input(type="text" name="title" id="title").form-control
+            input(type="text" name="title" id="title" value=( editing ? product.title : "")).form-control
           .form-group 
             label(for="description") Product Description
-            textarea#description(name="description" cols="30" rows="10").form-control
+            textarea#description(name="description" cols="30" rows="10").form-control #{editing ? product.description : ""}
           .form-group 
             label(for="imageUrl") Product Image URL
-            input#imageUrl(type="url" name="imageUrl").form-control
+            input#imageUrl(type="url" name="imageUrl" value=( editing ? product.imageUrl : "")).form-control
           .form-group 
             label(for="price") Product Price
-            input#price(type="number" name="price" min="0").form-control
-          button(type="submit").btn.btn-lg.mt-3.btn-primary Add Product 
+            input#price(type="number" name="price" min="0" value=( editing ? product.price : "")).form-control
+            button(type="submit").btn.btn-lg.mt-3.btn-outline-primary #{editing ? "Update Product" : "Add Product"}
