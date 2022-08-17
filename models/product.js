@@ -39,7 +39,7 @@ class Product {
         const updatedProducts = [...products];
         updatedProducts[existingProductIndex] = this;
 
-        fs.writeFile(filePath, JSON.stringify(products), (error) => {
+        fs.writeFile(filePath, JSON.stringify(updatedProducts), (error) => {
           console.log(error);
         });
       } else {
