@@ -19,4 +19,7 @@ block content
           .form-group 
             label(for="price") Product Price
             input#price(type="number" name="price" min="0" value=( editing ? product.price : "")).form-control
-            button(type="submit").btn.btn-lg.mt-3.btn-outline-primary #{editing ? "Update Product" : "Add Product"}
+          if editing
+            .form-group.hidden
+              input(type="hidden" name="productId" value=(product.id))
+          button(type="submit").btn.btn-lg.mt-3.btn-outline-primary #{editing ? "Update Product" : "Add Product"}
