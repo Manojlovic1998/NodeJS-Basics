@@ -32,10 +32,22 @@ class Product {
 
   save() {
     getProductsFromFile((products) => {
-      products.push(this);
-      fs.writeFile(filePath, JSON.stringify(products), (error) => {
-        console.log(error);
-      });
+      if (this.id) {
+        const existingProductIndex = products.findIndex(
+          (prod) => prod.id === this.id
+        );
+        const updatedProducts = [...products];
+        updatedProducts[existingProductIndex] = this;
+
+        fs.writeFile(filePath, JSON.stringify(products), (error) => {
+          console.log(error);
+        });
+      } else {
+        products.push(this);
+        fs.writeFile(filePath, JSON.stringify(products), (error) => {
+          console.log(error);
+        });
+      }
     });
   }
 
