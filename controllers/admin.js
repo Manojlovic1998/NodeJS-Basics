@@ -31,6 +31,25 @@ const getEditProduct = (req, res, next) => {
   });
 };
 
+const postEditProduct = (req, res, next) => {
+  // Req. body data
+  const prodId = req.body.productId;
+  const prodTitle = req.body.title;
+  const prodDesc = req.body.description;
+  const prodImgUrl = req.body.imageUrl;
+  const prodPrice = req.body.price;
+  // Product init
+  const updatedProduct = new Product(
+    prodId,
+    prodTitle,
+    prodImgUrl,
+    prodDesc,
+    prodPrice
+  );
+  updatedProduct.save();
+  return res.redirect("/admin/product-list");
+};
+
 const getAddProduct = (req, res, next) => {
   res.render("admin/add-product", {
     docTitle: "Add New Product",
@@ -54,4 +73,5 @@ module.exports = {
   postAddProduct,
   getProductList,
   getEditProduct,
+  postEditProduct,
 };
