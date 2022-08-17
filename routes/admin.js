@@ -8,6 +8,7 @@ const {
   postAddProduct,
   getProductList,
   getEditProduct,
+  postEditProduct,
 } = require("../controllers/admin");
 
 // Create Express.js router
@@ -21,6 +22,9 @@ router.get("/product-list", getProductList);
 
 // /admin/edit-product => GET
 router.get("/edit-product/:id", getEditProduct);
+
+// /admin/edit-product => POST
+router.post("/edit-product/:id", postEditProduct);
 
 // /admin/add-product => POST
 router.post("/add-product", postAddProduct);
