@@ -60,4 +60,15 @@ module.exports = class Cart {
       });
     });
   }
+
+  static getCart(getCartCallBack) {
+    fs.readFile(cartStorePath, (error, fileStoreData) => {
+      const cartData = JSON.parse(fileStoreData);
+      if (error) {
+        getCartCallBack(null);
+      } else {
+        getCartCallBack(cartData);
+      }
+    });
+  }
 };
