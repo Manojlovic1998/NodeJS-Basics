@@ -17,6 +17,7 @@ block content
               div.d-inline-block.mx-auto
                 a(href="/admin/edit-product/" + (product.id) + "?edit=true").btn.btn-outline-primary.btn-sm.me-2 Edit
                 form(action="/admin/delete-product" method="POST").d-inline
+                  input(type="hidden" name="productId" value=(product.id))
                   button(type="submit").btn.btn-outline-danger.btn-sm.ms-2 Delete
       else
         h1 No Products
