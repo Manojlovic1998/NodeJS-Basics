@@ -9,6 +9,7 @@ const {
   getProductList,
   getEditProduct,
   postEditProduct,
+  postDeleteProduct,
 } = require("../controllers/admin");
 
 // Create Express.js router
@@ -28,5 +29,8 @@ router.post("/edit-product/:id", postEditProduct);
 
 // /admin/add-product => POST
 router.post("/add-product", postAddProduct);
+
+// /admin/delete-product => POST
+router.post("/delete-product", postDeleteProduct);
 
 exports.routes = router;
