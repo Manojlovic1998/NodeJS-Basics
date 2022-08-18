@@ -15,8 +15,8 @@ const getProducts = (req, res, next) => {
 
 const getProductDetails = (req, res, next) => {
   const productId = req.params.id;
-  return Product.fetchById(productId, (product) => {
-    return res.render("shop/product-detail", {
+  Product.fetchById(productId, (product) => {
+    res.render("shop/product-detail", {
       docTitle: product.title,
       path: `/products`,
       product,
