@@ -52,6 +52,18 @@ class Product {
     });
   }
 
+  static delete(productId) {
+    getProductsFromFile((products) => {
+      // Filter products by omitting the value that matched the id
+      let updatedProducts = products.filter((prod) => {
+        return prod.id !== productId;
+      });
+      fs.writeFile(filePath, JSON.stringify(updatedProducts), (error) => {
+        console.log(error);
+      });
+    });
+  }
+
   static fetchAll(templateRenderCallback) {
     getProductsFromFile(templateRenderCallback);
   }
