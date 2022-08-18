@@ -43,6 +43,7 @@ class Product {
           console.log(error);
         });
       } else {
+        this.id = Math.random().toString();
         products.push(this);
         fs.writeFile(filePath, JSON.stringify(products), (error) => {
           console.log(error);
