@@ -1,2 +1,20 @@
 extends ../layouts/main-layout
 block content
+  main.container.py-5 
+    .row 
+      .col-12 
+        h1 Your Cart
+        p List of all products in your cart:
+    .row
+      if products.length > 0
+        ul
+          for product in products
+            li
+              h2.m-0 #{product.productData.title}
+              p.m-0 #{product.productData.price} $
+              p.m-0 #{product.qty}
+
+      else
+        .col-12
+          p Your Cart is empty.
+            a(href="/products") Try visiting the store.  
