@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 // Project's imports
 const rootPath = require("../util/path");
+const Cart = require("./cart");
 
 // Path where data should be stored
 const filePath = path.join(rootPath, "data", "products.json");
@@ -54,12 +55,17 @@ class Product {
 
   static delete(productId) {
     getProductsFromFile((products) => {
+      const product = products.find((prod) => {
+        return prod.id === productId;
+      });
       // Filter products by omitting the value that matched the id
       let updatedProducts = products.filter((prod) => {
         return prod.id !== productId;
       });
       fs.writeFile(filePath, JSON.stringify(updatedProducts), (error) => {
-        console.log(error);
+        if (!error) {
+          Cart.deleteProduct(productId, product.price);
+        }
       });
     });
   }
