@@ -9,10 +9,16 @@ block content
       if products.length > 0
         ul
           for product in products
-            li
-              h2.m-0 #{product.productData.title}
-              p.m-0 #{product.productData.price} $
-              p.m-0 #{product.qty}
+            li.mt-5
+              div
+                h2.m-0.d-inline.align-middle.me-3 #{product.productData.title}
+                form(action="/cart/delete-item" method="POST").d-inline
+                  .form-group.d-inline
+                    input(type="hidden" name="productId" value=(product.productData.id))
+                    button(type="submit").btn.btn-outline-danger Delete
+              p.m-0 Price: #{product.productData.price}$
+              p.m-0 Quantity: #{product.qty}
+
 
       else
         .col-12
