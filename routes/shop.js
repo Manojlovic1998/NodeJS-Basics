@@ -8,6 +8,7 @@ const {
   getCheckout,
   getProductDetails,
   postCart,
+  postCartDeleteProduct,
 } = require("../controllers/shop");
 
 // Express.js Router
@@ -27,6 +28,9 @@ router.get("/cart", getCart);
 
 // /cart => POST
 router.post("/cart", postCart);
+
+// /cart/delete-item => POST
+router.post("/cart/delete-item", postCartDeleteProduct);
 
 // /checkout => GET
 router.get("/checkout", getCheckout);
