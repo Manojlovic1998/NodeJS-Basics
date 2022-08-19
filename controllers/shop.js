@@ -61,6 +61,14 @@ const getCheckout = (req, res, next) => {
   res.render("shop/checkout", { docTitle: "Checkout", path: "/checkout" });
 };
 
+const postCartDeleteProduct = (req, res, next) => {
+  const prodId = req.body.productId;
+  Product.fetchById(prodId, (product) => {
+    Cart.deleteProduct(prodId, product.price);
+    res.redirect("/cart");
+  });
+};
+
 module.exports = {
   getProducts,
   getIndex,
@@ -68,4 +76,5 @@ module.exports = {
   getCheckout,
   getProductDetails,
   postCart,
+  postCartDeleteProduct,
 };
