@@ -68,8 +68,14 @@ const postAddProduct = (req, res, next) => {
   const price = req.body.price;
 
   const product = new Product(null, title, imageUrl, description, price);
-  product.save();
-  res.redirect("/products");
+  product
+    .save()
+    .then(() => {
+      res.redirect("/products");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const postDeleteProduct = (req, res, next) => {
