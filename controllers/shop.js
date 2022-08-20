@@ -3,14 +3,17 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 const getProducts = (req, res, next) => {
-  // __dirname global variable that points to the folder in which we are using it
-  return Product.fetchAll((products) => {
-    res.render("shop/product-list", {
-      products,
-      docTitle: "Shop",
-      path: "/products",
+  Product.fetchAll()
+    .then(([rows, fieldData]) => {
+      res.render("shop/product-list", {
+        products: rows,
+        docTitle: "Shop",
+        path: "/products",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  });
 };
 
 const getProductDetails = (req, res, next) => {
