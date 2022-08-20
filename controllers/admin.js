@@ -1,13 +1,17 @@
 const Product = require("../models/product");
 
 const getProductList = (req, res, next) => {
-  return Product.fetchAll((products) => {
-    return res.render("admin/product-list", {
-      docTitle: "Admin Product Listing",
-      path: "/admin/product-list",
-      products: products,
+  return Product.fetchAll()
+    .then(([rows, fieldData]) => {
+      res.render("admin/product-list", {
+        docTitle: "Admin Product Listing",
+        path: "/admin/product-list",
+        products: rows,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  });
 };
 
 const getEditProduct = (req, res, next) => {
