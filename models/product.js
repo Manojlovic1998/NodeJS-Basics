@@ -1,5 +1,6 @@
 // Project's imports
 const Cart = require("./cart");
+const db = require("../util/database");
 
 class Product {
   constructor(id, title, imageUrl, description, price) {
@@ -10,10 +11,15 @@ class Product {
     this.price = price;
   }
 
+  save() {}
 
+  static delete(productId) {}
 
+  static fetchAll() {
+    return db.execute("SELECT * FROM products");
   }
 
+  static getById(productId) {}
 }
 
 module.exports = Product;
