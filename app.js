@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 const adminRoutes = require("./routes/admin.js");
 const shopRoutes = require("./routes/shop.js");
 const { get404ErrorPage } = require("./controllers/errors");
-
 // Instantiate Express App
 const app = express();
 
@@ -24,9 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/admin", express.static(path.join(__dirname, "public")));
 
-// Router with /admin filter
+// Admin Router, with /admin filter
 app.use("/admin", adminRoutes.routes);
-// Router
+// Shop Router
 app.use(shopRoutes);
 
 // 404 Route
