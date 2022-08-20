@@ -18,13 +18,16 @@ const getProducts = (req, res, next) => {
 
 const getProductDetails = (req, res, next) => {
   const productId = req.params.id;
-  Product.fetchById(productId, (product) => {
-    res.render("shop/product-detail", {
-      docTitle: product.title,
-      path: `/products`,
-      product,
-    });
-  });
+  Product.fetchById(productId)
+    .then(([row, fieldData]) => {
+      console.log(row[0]);
+      res.render("shop/product-detail", {
+        docTitle: row[0].title,
+        path: `/products`,
+        product: row[0],
+      });
+    })
+    .catch((error) => console.log(error));
 };
 
 const getIndex = (req, res, next) => {
