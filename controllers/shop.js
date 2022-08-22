@@ -3,16 +3,16 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 
 const getProducts = (req, res, next) => {
-  Product.fetchAll()
-    .then(([rows, fieldData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("shop/product-list", {
-        products: rows,
-        docTitle: "Shop",
+        docTitle: "Product Listing",
+        products: products,
         path: "/products",
       });
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((err) => {
+      console.log(err);
     });
 };
 
