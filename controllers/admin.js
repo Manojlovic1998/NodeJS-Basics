@@ -1,16 +1,15 @@
 const Product = require("../models/product");
 
 const getProductList = (req, res, next) => {
-  return Product.fetchAll()
-    .then(([rows, fieldData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render("admin/product-list", {
-        docTitle: "Admin Product Listing",
-        path: "/admin/product-list",
-        products: rows,
+        docTitle: "Product Listing",
+        products: products,
       });
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((err) => {
+      console.log(err);
     });
 };
 
@@ -66,15 +65,18 @@ const postAddProduct = (req, res, next) => {
   const description = req.body.description;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
-
-  const product = new Product(null, title, imageUrl, description, price);
-  product
-    .save()
-    .then(() => {
+  Product.create({
+    title: title,
+    price: price,
+    imageUrl: imageUrl,
+    description: description,
+  })
+    .then((result) => {
+      console.log(result);
       res.redirect("/products");
     })
-    .catch((error) => {
-      console.log(error);
+    .catch((err) => {
+      console.log(err);
     });
 };
 
