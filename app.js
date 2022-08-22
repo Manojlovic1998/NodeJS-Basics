@@ -1,6 +1,5 @@
 // Core Node.js Package Imports
 const path = require("path");
-
 // Third Party Package Imports
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,6 +7,7 @@ const bodyParser = require("body-parser");
 const adminRoutes = require("./routes/admin.js");
 const shopRoutes = require("./routes/shop.js");
 const { get404ErrorPage } = require("./controllers/errors");
+const sequelize = require("./util/database");
 // Instantiate Express App
 const app = express();
 
@@ -34,7 +34,15 @@ app.use(get404ErrorPage);
 // Server Config
 const port = 3000;
 
-// Takes event listener as an arg.
-// Simply a function that will execute for every
-// incoming request
-app.listen(port);
+// Sync database models
+sequelize
+  .sync()
+  .then((result) => {
+    // Takes event listener as an arg.
+    // Simply a function that will execute for every
+    // incoming request
+    app.listen(port);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
