@@ -20,18 +20,22 @@ const getEditProduct = (req, res, next) => {
   }
 
   let productId = req.params.id;
-  Product.fetchById(productId, (product) => {
-    if (!product) {
-      return res.redirect("/");
-    }
+  Product.findByPk(productId)
+    .then((product) => {
+      if (!product) {
+        return res.redirect("/");
+      }
 
-    res.render("admin/edit-product", {
-      docTitle: "Edit Product",
-      path: "/admin/edit-product",
-      product,
-      editing,
+      res.render("admin/edit-product", {
+        docTitle: "Edit Product",
+        path: "/admin/edit-product",
+        product,
+        editing,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
 };
 
 const postEditProduct = (req, res, next) => {
