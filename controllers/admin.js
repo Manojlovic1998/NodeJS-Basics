@@ -1,5 +1,5 @@
+// Project's imports
 const Product = require("../models/product");
-
 const getProductList = (req, res, next) => {
   Product.findAll()
     .then((products) => {
@@ -46,15 +46,25 @@ const postEditProduct = (req, res, next) => {
   const prodImgUrl = req.body.imageUrl;
   const prodPrice = req.body.price;
   // Product init
-  const updatedProduct = new Product(
-    prodId,
-    prodTitle,
-    prodImgUrl,
-    prodDesc,
-    prodPrice
-  );
-  updatedProduct.save();
-  return res.redirect("/admin/product-list");
+  Product.update(
+    {
+      title: prodTitle,
+      description: prodDesc,
+      imageUrl: prodImgUrl,
+      price: prodPrice,
+    },
+    {
+      where: {
+        id: prodId,
+      },
+    }
+  )
+    .then(() => {
+      res.redirect("/admin/product-list");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const getAddProduct = (req, res, next) => {
