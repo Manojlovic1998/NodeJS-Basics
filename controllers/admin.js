@@ -1,5 +1,6 @@
 // Project's imports
 const Product = require("../models/product");
+
 const getProductList = (req, res, next) => {
   Product.findAll()
     .then((products) => {
@@ -86,7 +87,6 @@ const postAddProduct = (req, res, next) => {
     description: description,
   })
     .then((result) => {
-      console.log(result);
       res.redirect("/products");
     })
     .catch((err) => {
@@ -96,8 +96,13 @@ const postAddProduct = (req, res, next) => {
 
 const postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.delete(prodId);
-  res.redirect("/products");
+  Product.destroy({ where: { id: prodId } })
+    .then(() => {
+      res.redirect("/products");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 module.exports = {
